@@ -1,0 +1,86 @@
+{
+    "manifestVersion": 1,
+    "id": "authenticated-scripts",
+    "publisher": "cloudpup",
+    "version": "1.0.0",
+    "name": "Authenticated Scripts",
+    "description": "Use a service connection with scripts instead of pasting secrets into variables!",
+    "categories": [
+        "Azure Pipelines"
+    ],
+    "tags": [
+        "service-connection",
+        "authenticated",
+        "bash",
+        "powershell"
+    ],
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "files": [
+        {
+            "path": "tasks/powershell"
+        },
+        {
+            "path": "docs",
+            "addressable": true
+        }
+    ],
+    "content": {
+        "details": {
+            "path": "docs/Overview.md"
+        },
+        "license": {
+            "path": "LICENSE"
+        }
+    },
+    "icons": {
+        "default": "images/logo.png"
+    },
+    "links": {
+        "home": {
+            "uri": "https://github.com/cloudpups/authenticated-scripts"
+        },
+        "repository": {
+            "uri": "https://github.com/cloudpups/authenticated-scripts"
+        },
+        "issues": {
+            "uri": "https://github.com/cloudpups/authenticated-scripts/issues"
+        }
+    },
+    "repository": {
+        "type": "git",
+        "uri": "https://github.com/cloudpups/authenticated-scripts"
+    },
+    "badges": [
+        {
+          "uri": "https://dev.azure.com/cloudpup/Public%20Pen/_apis/build/status/authenticated%scripts?branchName=main&stageName=Build",
+          "href": "https://dev.azure.com/cloudpup/Public%20Pen/_build?definitionId=7&_a=summary&branchFilter=2%2C2%2C2%2C2%2C2",
+          "description": "Build"
+        },
+        {
+          "uri": "https://dev.azure.com/cloudpup/Public%20Pen/_apis/build/status/authenticated%scripts?branchName=main&stageName=Publish%20Public",
+          "href": "https://dev.azure.com/cloudpup/Public%20Pen/_build?definitionId=7&_a=summary&branchFilter=2%2C2%2C2%2C2%2C2",
+          "description": "Release"
+        }
+      ],
+    "contributions": [
+        {
+            "id": "powershell-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/powershell"
+            }
+        }
+    ],
+    "screenshots": [
+        {
+            "path": "docs/highlighted_env.png"
+        }
+    ]
+}

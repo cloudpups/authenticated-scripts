@@ -1,0 +1,171 @@
+name: '0.0$(rev:.r)'
+
+parameters:
+- name: extension_name
+  type: string
+  default: Authenticated Scripts
+- name: connected_service
+  type: string
+  default: VS Marketplace CloudPup
+- name: share_with
+  type: string
+  default: joshuadmiller
+- name: environment_beta
+  type: string
+  default: CloudPup Visual Studio Marketplace - Beta
+- name: environment_production
+  type: string
+  default: CloudPup Visual Studio Marketplace - Prod
+
+variables:
+- name: package_name
+  value: packaged_extension.vsix
+
+trigger:
+# https://docs.microsoft.com/en-us/azure/devops/pipelines/process/stages?view=azure-devops&tabs=yaml#specify-queuing-policies
+# ^^ ugh
+  batch: false
+  branches:
+    include:
+    - main
+    - feature/*
+  paths:
+    exclude:
+    - test/*
+
+pr: none
+# - main
+
+
+pool:
+  vmImage: 'windows-2019'
+  demands: npm
+
+stages:
+- stage: 'Build'
+  displayName: 'Build'
+  jobs:
+  - job: 
+    displayName: 'Build'
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '10.x'
+      displayName: 'Install Node.js'
+    - script: |
+        npm run initdev
+      displayName: 'Install Node dependencies'
+    - task: Npm@1
+      displayName: 'Build the extension'
+      inputs:
+        command: custom
+        verbose: false
+        customCommand: 'run build'
+    - task: TfxInstaller@3
+      displayName: 'Use Node CLI for Azure DevOps'
+      inputs:
+        version: '0.9.x'
+        checkLatest: true
+    - task: PackageAzureDevOpsExtension@3
+      displayName: 'Package Extension: $(Build.SourcesDirectory)'
+      name: 'packageStep'
+      inputs:
+        rootFolder: '$(Build.SourcesDirectory)'
+        outputPath: '$(Build.ArtifactStagingDirectory)\${{ variables.package_name }}'                
+        extensionVersion: '$(Build.BuildNumber)'
+        updateTasksVersion: true
+        updateTasksVersionType: patch
+        extensionVisibility: private
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish vsix'
+      inputs:
+        publishLocation: pipeline
+        targetPath: '$(packageStep.Extension.OutputPath)'
+        artifact: 'vsix'
+      condition: succeededOrFailed()
+- stage: PublishDev
+  displayName: 'Publish Private Beta'
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+  dependsOn: 'Build'
+  jobs:
+    - deployment: 
+      environment: ${{ parameters.environment_beta }}
+      strategy: 
+        runOnce:
+         deploy:
+          steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '10.x'
+            displayName: 'Install Node.js'
+          - task: TfxInstaller@3
+            displayName: 'Use Node CLI for Azure DevOps'
+            inputs:
+              version: '0.9.x'
+              checkLatest: true
+          - task: PublishAzureDevOpsExtension@3
+            name: 'publishDev'
+            inputs:              
+              connectedServiceName: ${{ parameters.connected_service }}
+              fileType: 'vsix'
+              vsixFile: '$(Pipeline.Workspace)/vsix/${{ variables.package_name }}'                     
+              extensionTag: '-beta'
+              extensionName: '${{ parameters.extension_name }} - Beta'
+              updateTasksVersion: false
+              extensionVisibility: 'privatepreview'
+              shareWith: ${{ parameters.share_with }}
+              noWaitValidation: true
+          - task: IsAzureDevOpsExtensionValid@3
+            inputs:              
+              connectedServiceName: ${{ parameters.connected_service }}
+              method: 'vsix'
+              vsixFile: '$(publishDev.Extension.OutputPath)'
+          - task: PublishPipelineArtifact@1
+            displayName: 'Publish vsix'
+            inputs:
+              publishLocation: pipeline
+              targetPath: '$(publishDev.Extension.OutputPath)'
+              artifact: 'beta'
+            condition: succeededOrFailed()
+- stage: PublishProd
+  displayName: 'Publish Public'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+  dependsOn: 'PublishDev'
+  jobs:
+    - deployment: 
+      environment: ${{ parameters.environment_production }}
+      strategy: 
+        runOnce:
+         deploy:
+          steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: '10.x'
+            displayName: 'Install Node.js'
+            
+          - task: TfxInstaller@3
+            displayName: 'Use Node CLI for Azure DevOps'
+            inputs:
+              version: '0.9.x'
+              checkLatest: true
+          - task: PublishAzureDevOpsExtension@3
+            name: 'publishProd'
+            inputs:              
+              connectedServiceName: ${{ parameters.connected_service }}
+              fileType: 'vsix'
+              vsixFile: '$(Pipeline.Workspace)/vsix/${{ variables.package_name }}'                     
+              updateTasksVersion: false
+              extensionVisibility: 'publicpreview'
+              noWaitValidation:  true          
+          - task: IsAzureDevOpsExtensionValid@3
+            inputs:              
+              connectedServiceName: ${{ parameters.connected_service }}
+              method: 'vsix'
+              vsixFile: '$(publishProd.Extension.OutputPath)'
+          - task: PublishPipelineArtifact@1
+            displayName: 'Publish vsix'
+            inputs:
+              publishLocation: pipeline
+              targetPath: '$(publishProd.Extension.OutputPath)'
+              artifact: 'prod'
+            condition: succeededOrFailed()
