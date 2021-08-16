@@ -31,7 +31,7 @@ Please note that `serviceConnection: 'Testing Authenticated Shell'` was configur
 
 ```yml
 steps:
-- task: AuthenticatedPowerShell@0  
+- task: AuthenticatedPowerShell@1  
   inputs:
     serviceConnection: 'Testing Authenticated Shell'
     targetType: inline
