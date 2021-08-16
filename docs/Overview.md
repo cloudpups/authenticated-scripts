@@ -27,7 +27,7 @@ Please note that this task does **not** persist the environment variables for lo
 
 ## Example
 
-Please note that `serviceConnection: 'Testing Authenticated Shell'` was configured with a [Service Connection][serviceConnection].
+Please note that `serviceConnection: 'Testing Authenticated Shell'` was configured with a [Service Connection][serviceConnection]. 
 
 ```yml
 steps:
@@ -36,6 +36,10 @@ steps:
     serviceConnection: 'Testing Authenticated Shell'
     targetType: inline
     script: 'Write-Host "url: $env:AS_SC_URL | username: $env:AS_SC_USERNAME | password: $env:AS_SC_PASSWORD"'
+- task: AuthenticatedBash@1  
+  inputs:
+    serviceConnection: 'Testing Authenticated Shell'
+    script: 'echo "Hello $AS_SC_URL $AS_SC_USERNAME $AS_SC_PASSWORD"'     
 ```
 
 ## Motivation
