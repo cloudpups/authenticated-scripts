@@ -24,6 +24,9 @@
             "path": "tasks/powershell"
         },
         {
+            "path": "tasks/bash"
+        },
+        {
             "path": "docs",
             "addressable": true
         }
