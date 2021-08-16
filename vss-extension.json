@@ -56,12 +56,12 @@
     },
     "badges": [
         {
-          "uri": "https://dev.azure.com/cloudpup/Public%20Pen/_apis/build/status/authenticated%scripts?branchName=main&stageName=Build",
+          "uri": "https://dev.azure.com/cloudpup/Public%20Pen/_apis/build/status/Authenticated%20Scripts?branchName=main&stageName=Build",
           "href": "https://dev.azure.com/cloudpup/Public%20Pen/_build?definitionId=7&_a=summary&branchFilter=2%2C2%2C2%2C2%2C2",
           "description": "Build"
         },
         {
-          "uri": "https://dev.azure.com/cloudpup/Public%20Pen/_apis/build/status/authenticated%scripts?branchName=main&stageName=Publish%20Public",
+          "uri": "https://dev.azure.com/cloudpup/Public%20Pen/_apis/build/status/Authenticated%20Scripts?branchName=main&stageName=Publish%20Public",
           "href": "https://dev.azure.com/cloudpup/Public%20Pen/_build?definitionId=7&_a=summary&branchFilter=2%2C2%2C2%2C2%2C2",
           "description": "Release"
         }
