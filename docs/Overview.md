@@ -9,7 +9,7 @@ Use a [service connection][serviceConnection] with scripts instead of pasting se
 
 ## How
 
-![A screenshot showing the service connection exposed as environment variables](./highlighted_env.png)
+![A screenshot showing the service connection exposed as environment variables](/docs/highlighted_env.png)
 
 This task injects the values of a Generic Service Connection into the current environment so that the specified script may utilize them. The values of the Generic Service Connection are mapped to environment variables as follows:
 
