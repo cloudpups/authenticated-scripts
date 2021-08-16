@@ -173,3 +173,17 @@ stages:
               targetPath: '$(publishProd.Extension.OutputPath)'
               artifact: 'prod'
             condition: succeededOrFailed()
+          - task: GitHubRelease@1
+            inputs:
+              gitHubConnection: 'GitHub-CloudPup'
+              repositoryName: '$(Build.Repository.Name)'
+              action: 'create'
+              target: '$(Build.SourceVersion)'
+              tagSource: 'userSpecifiedTag'
+              tag: 'v$(Build.BuildNumber)'
+              title: 'v$(Build.BuildNumber)'
+              releaseNotesSource: 'inline'
+              assets: '$(publishProd.Extension.OutputPath)*'
+              changeLogCompareToRelease: 'lastFullRelease'
+              changeLogType: 'issueBased'
+              changeLogLabels: '[{ "state" : "closed" }]'
