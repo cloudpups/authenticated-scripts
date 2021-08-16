@@ -39,6 +39,7 @@ steps:
 - task: AuthenticatedBash@1  
   inputs:
     serviceConnection: 'Testing Authenticated Shell'
+    targetType: inline
     script: 'echo "Hello $AS_SC_URL $AS_SC_USERNAME $AS_SC_PASSWORD"'     
 ```
 
