@@ -34,6 +34,7 @@ steps:
 - task: AuthenticatedPowerShell@0  
   inputs:
     serviceConnection: 'Testing Authenticated Shell'
+    targetType: inline
     script: 'Write-Host "url: $env:AS_SC_URL | username: $env:AS_SC_USERNAME | password: $env:AS_SC_PASSWORD"'
 ```
 

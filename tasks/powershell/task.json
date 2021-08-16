@@ -4,7 +4,7 @@
   "friendlyName": "Authenticated PowerShell",
   "description": "Run a PowerShell script with a Service Connection exposed as environment variables on Linux, macOS, or Windows.",
   "author": "cloudpup",
-  "helpMarkDown": "The Service Connection is mapped to environment variables as follows:\n*url --> `AS_SC_URL`\n* username --> `AS_SC_USERNAME`\n* password --> `AS_SC_PASSWORD`\n\nSee the example for more details: [example](https://github.com/cloudpups/authenticated-scripts/blob/main/docs/Overview.md#example)",
+  "helpMarkDown": "The Service Connection is mapped to environment variables as follows:\n* url --> `AS_SC_URL`\n* username --> `AS_SC_USERNAME`\n* password --> `AS_SC_PASSWORD`\n\nSee the example for more details: [example](https://github.com/cloudpups/authenticated-scripts/blob/main/docs/Overview.md#example)",
   "category": "Utility",
   "version": {
     "Major": 1,
