@@ -16,6 +16,10 @@ parameters:
 - name: environment_production
   type: string
   default: CloudPup Visual Studio Marketplace - Prod
+# For template, set this to publicpreview as default
+- name: productionVisibility
+  type: string
+  default: public
 
 variables:
 - name: package_name
@@ -155,7 +159,7 @@ stages:
               fileType: 'vsix'
               vsixFile: '$(Pipeline.Workspace)/vsix/${{ variables.package_name }}'                     
               updateTasksVersion: false
-              extensionVisibility: 'publicpreview'
+              extensionVisibility: ${{ parameters.productionVisibility }}
               noWaitValidation:  true          
           - task: IsAzureDevOpsExtensionValid@3
             inputs:              

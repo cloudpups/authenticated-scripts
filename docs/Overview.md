@@ -56,7 +56,7 @@ There are many tasks today that ship with Service Connections so that users of A
 
 As creating (and *maintaining*) a custom task is a non-trivial effort, many folks opt for writing and executing a script (e.g. Bash or PowerShell). Unfortunately, as of the initial writing of this, no other tasks existed that allowed a script to access Service Connections in a consistent and secure fashion. Thus this extension was created- so that scripts can utilize Service Connections in a consistent fashion.
 
-So why not simply use private variables (as some answers to "How to use a Service Connection in a Script" suggest)? This could boil down to preference, but Service Connections offer a variety of benefits over using variables (e.g. update onc and use across many pipelines, approvals and checks, etc).
+So why not simply use private variables (as some answers to "How to use a Service Connection in a Script" suggest)? This could boil down to preference, but Service Connections offer a variety of benefits over using variables (e.g. update once and use across many pipelines, approvals and checks, etc).
 
 Instances of folks asking for this:
 
