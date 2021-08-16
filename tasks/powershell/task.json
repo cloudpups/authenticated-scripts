@@ -19,6 +19,13 @@
     "npm"
   ],
   "instanceNameFormat": "Authenticated PowerShell Script",
+  "groups": [
+    {
+      "name": "advanced",
+      "displayName": "Advanced",
+      "isExpanded": false
+    }
+  ],
   "inputs": [
     {
       "name": "serviceConnection",

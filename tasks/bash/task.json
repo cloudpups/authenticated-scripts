@@ -19,6 +19,13 @@
     "npm"
   ],
   "instanceNameFormat": "Authenticated Bash Script",
+  "groups": [
+    {
+        "name": "advanced",
+        "displayName": "Advanced",
+        "isExpanded": false
+    }
+  ],
   "inputs": [
     {
       "name": "serviceConnection",
