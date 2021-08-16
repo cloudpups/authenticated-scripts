@@ -19,6 +19,7 @@
     "npm"
   ],
   "instanceNameFormat": "Authenticated PowerShell Script",
+  "showEnvironmentVariables": true,
   "groups": [
     {
       "name": "advanced",
