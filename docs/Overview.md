@@ -5,7 +5,7 @@ Use a [service connection][serviceConnection] with scripts instead of pasting se
 ## Features
 
 * ✅ Supply Generic Service Connection to a PowerShell script
-* ◻ Supply Generic Service Connection to a Bash script
+* ✅ Supply Generic Service Connection to a Bash script
 
 ## How
 

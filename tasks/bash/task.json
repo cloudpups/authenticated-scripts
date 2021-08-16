@@ -1,0 +1,124 @@
+{
+  "id": "4ab323dd-2404-4b0f-8df2-397cb1a6e7be",
+  "name": "AuthenticatedBash",
+  "friendlyName": "Authenticated Bash",
+  "description": "Run a Bash script with a Service Connection exposed as environment variables on Linux, macOS, or Windows.",
+  "author": "cloudpup",
+  "helpMarkDown": "The Service Connection is mapped to environment variables as follows:\n* url --> `AS_SC_URL`\n* username --> `AS_SC_USERNAME`\n* password --> `AS_SC_PASSWORD`\n\nSee the example for more details: [example](https://github.com/cloudpups/authenticated-scripts/blob/main/docs/Overview.md#example)",
+  "category": "Utility",
+  "version": {
+    "Major": 1,
+    "Minor": 0,
+    "Patch": 0
+  },
+  "visibility": [
+    "Build",
+    "Release"
+  ],
+  "demands": [
+    "npm"
+  ],
+  "instanceNameFormat": "Authenticated Bash Script",
+  "inputs": [
+    {
+      "name": "serviceConnection",
+      "type": "connectedService:Generic",
+      "label": "Service Connection",
+      "required": true,
+      "defaultValue": ""
+    },
+    {
+      "name": "targetType",
+      "type": "radio",
+      "label": "Type",
+      "required": false,
+      "defaultValue": "filePath",
+      "helpMarkDown": "Target script type: File Path or Inline",
+      "options": {
+        "filePath": "File Path",
+        "inline": "Inline"
+      }
+    },
+    {
+      "name": "filePath",
+      "type": "filePath",
+      "label": "Script Path",
+      "visibleRule": "targetType = filePath",
+      "required": true,
+      "defaultValue": "",
+      "helpMarkDown": "Path of the script to execute. Must be a fully qualified path or relative to $(System.DefaultWorkingDirectory)."
+    },
+    {
+      "name": "arguments",
+      "type": "string",
+      "label": "Arguments",
+      "visibleRule": "targetType = filePath",
+      "required": false,
+      "defaultValue": "",
+      "helpMarkDown": "Arguments passed to the shell script. Either ordinal parameters or named parameters."
+    },
+    {
+      "name": "script",
+      "type": "multiLine",
+      "label": "Script",
+      "visibleRule": "targetType = inline",
+      "required": true,
+      "defaultValue": "# Write your commands here\n\necho 'Hello world'\n",
+      "properties": {
+        "resizable": "true",
+        "rows": "10",
+        "maxLength": "5000"
+      },
+      "helpMarkDown": ""
+    },
+    {
+      "name": "workingDirectory",
+      "type": "filePath",
+      "label": "Working Directory",
+      "defaultValue": "",
+      "required": false,
+      "groupName": "advanced"
+    },
+    {
+      "name": "failOnStderr",
+      "type": "boolean",
+      "label": "Fail on Standard Error",
+      "defaultValue": "false",
+      "required": false,
+      "helpMarkDown": "If this is true, this task will fail if any errors are written to the StandardError stream.",
+      "groupName": "advanced"
+    },
+    {
+      "name": "noProfile",
+      "type": "boolean",
+      "label": "Don't load the profile startup/initialization files",
+      "defaultValue": "true",
+      "required": false,
+      "helpMarkDown": "Don't load the system-wide startup file `/etc/profile' or any of the personal initialization files",
+      "groupName": "advanced"
+    },
+    {
+      "name": "noRc",
+      "type": "boolean",
+      "label": "Don't read the `~/.bashrc' initialization file",
+      "defaultValue": "true",
+      "required": false,
+      "groupName": "advanced"
+    }
+  ],
+  "execution": {
+    "Node": {
+      "target": "execute-bash.js",
+      "argumentFormat": ""
+    }
+  },
+  "messages": {
+    "GeneratingScript": "Generating script.",
+    "JS_ExitCode": "Bash exited with code '%s'.",
+    "JS_FormattedCommand": "Formatted command: %s",
+    "JS_InvalidFilePath": "Invalid file path '%s'.",
+    "JS_ScriptContents": "Script contents:",
+    "JS_Stderr": "Bash wrote one or more lines to the standard error stream.",
+    "JS_TranslatePathFailed": "Unable to translate the path '%s' to the Linux file system."
+  }
+}

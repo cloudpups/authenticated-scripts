@@ -56,16 +56,16 @@
     },
     "badges": [
         {
-          "uri": "https://dev.azure.com/cloudpup/Public%20Pen/_apis/build/status/Authenticated%20Scripts?branchName=main&stageName=Build",
-          "href": "https://dev.azure.com/cloudpup/Public%20Pen/_build?definitionId=7&_a=summary&branchFilter=2%2C2%2C2%2C2%2C2",
-          "description": "Build"
+            "uri": "https://dev.azure.com/cloudpup/Public%20Pen/_apis/build/status/Authenticated%20Scripts?branchName=main&stageName=Build",
+            "href": "https://dev.azure.com/cloudpup/Public%20Pen/_build?definitionId=7&_a=summary&branchFilter=2%2C2%2C2%2C2%2C2",
+            "description": "Build"
         },
         {
-          "uri": "https://dev.azure.com/cloudpup/Public%20Pen/_apis/build/status/Authenticated%20Scripts?branchName=main&stageName=Publish%20Public",
-          "href": "https://dev.azure.com/cloudpup/Public%20Pen/_build?definitionId=7&_a=summary&branchFilter=2%2C2%2C2%2C2%2C2",
-          "description": "Release"
+            "uri": "https://dev.azure.com/cloudpup/Public%20Pen/_apis/build/status/Authenticated%20Scripts?branchName=main&stageName=Publish%20Public",
+            "href": "https://dev.azure.com/cloudpup/Public%20Pen/_build?definitionId=7&_a=summary&branchFilter=2%2C2%2C2%2C2%2C2",
+            "description": "Release"
         }
-      ],
+    ],
     "contributions": [
         {
             "id": "powershell-task",
@@ -75,6 +75,16 @@
             ],
             "properties": {
                 "name": "tasks/powershell"
+            }
+        },
+        {
+            "id": "bash-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/bash"
             }
         }
     ],
