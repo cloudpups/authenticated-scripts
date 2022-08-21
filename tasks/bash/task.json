@@ -16,7 +16,6 @@
     "Release"
   ],
   "demands": [
-    "npm"
   ],
   "instanceNameFormat": "Authenticated Bash Script",
   "showEnvironmentVariables": true,
