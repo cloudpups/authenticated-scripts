@@ -16,7 +16,6 @@
     "Release"
   ],
   "demands": [
-    "npm"
   ],
   "instanceNameFormat": "Authenticated PowerShell Script",
   "showEnvironmentVariables": true,
