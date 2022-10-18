@@ -2,6 +2,12 @@
 
 Use a [service connection][serviceConnection] with scripts instead of pasting secrets into variables!
 
+### ❗ *Important note on using Service Connections* ❗
+
+Please note that these tasks are built to only use `Generic` Service Connections. No other connections will be displayed when configuring these tasks. This is due to how Service Connections function in Azure DevOps- `Generic` is a "well-known" connection type as it is built into the platform, and thus can be reliably referenced by these tasks 🙂 
+
+Please see the following GitHub Issue if more detail is needed: [LINK](https://github.com/cloudpups/authenticated-scripts/issues/5)
+
 ## Features
 
 * ✅ Supply Generic Service Connection to a PowerShell script
