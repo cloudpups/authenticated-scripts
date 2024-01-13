@@ -36,6 +36,7 @@ async function run() {
         const input_failOnStderr = tl.getBoolInput('failOnStderr', false);
         const input_ignoreLASTEXITCODE = tl.getBoolInput('ignoreLASTEXITCODE', false);
         const input_workingDirectory = tl.getPathInput('workingDirectory', /*required*/ true, /*check*/ true);
+        const input_pwsh: boolean = tl.getBoolInput('pwsh', false);
         
         let input_filePath: string;
         let input_arguments: string;
@@ -107,15 +108,23 @@ async function run() {
 
         // Run the script.
         //
-        // Note, prefer "pwsh" over "powershell". At some point we can remove support for "powershell".
+        // Note, prefer "powershell" over "pwsh" on Windows unless the pwsh input is true.
         //
         // Note, use "-Command" instead of "-File" to match the Windows implementation. Refer to
         // comment on Windows implementation for an explanation why "-Command" is preferred.
         console.log('========================== Starting Command Output ===========================');
 
         const executionOperator = input_runScriptInSeparateScope ? '&' : '.';
-        const powershell = tl.tool(tl.which('pwsh') || tl.which('powershell') || tl.which('pwsh', true))
-            .arg('-NoLogo')
+        const isWindows = os.platform() === 'win32';
+                
+        let powershell: tr.ToolRunner;
+        if (input_pwsh || !isWindows) {
+            powershell = tl.tool(tl.which('pwsh') || tl.which('powershell') || tl.which('pwsh', true));
+        } else {
+            powershell = tl.tool(tl.which('powershell') || tl.which('pwsh') || tl.which('powershell', true));
+        }
+
+        powershell.arg('-NoLogo')
             .arg('-NoProfile')
             .arg('-NonInteractive')
             .arg('-Command')
