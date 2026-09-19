@@ -1,3 +1,6 @@
+pool:
+  vmImage: 'windows-latest'
+
 steps:
 - task: AuthenticatedPowerShell@1  
   inputs:

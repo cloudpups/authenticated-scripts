@@ -31,7 +31,7 @@
   "devDependencies": {
     "@types/core-js": "^2.5.0",
     "@types/fs-extra": "^5.0.4",
-    "@types/node": "^8.10.61",
+    "@types/node": "^20.0.0",
     "@types/promise-retry": "^1.1.1",
     "@types/temp": "^0.8.29",
     "@types/x2js": "0.0.27",
@@ -43,8 +43,8 @@
     "eslint-config-airbnb-typescript": "^9.0.0",
     "eslint-plugin-import": "^2.22.0",
     "glob-exec": "^0.1.1",
-    "tfx-cli": "^0.7.11",
+    "tfx-cli": "^0.12.0",
     "tslint": "^5.20.1",
-    "typescript": "^3.9.7"
+    "typescript": "^5.4.0"
   }
 }

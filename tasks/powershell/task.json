@@ -147,7 +147,7 @@
     }
   ],
   "execution": {
-    "Node": {
+    "Node24": {
       "target": "execute-cli.js",
       "argumentFormat": ""
     }

@@ -114,7 +114,7 @@
     }
   ],
   "execution": {
-    "Node": {
+    "Node24": {
       "target": "execute-bash.js",
       "argumentFormat": ""
     }
